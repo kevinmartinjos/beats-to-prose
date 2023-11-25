@@ -10,7 +10,7 @@ I spent 3 hours (ish) on this exercise.
 I usually write more thoughtful commit messages and squash the commits where necessary. I haven't done that here in the interest of transparency.
 
 ## General approach
-I used GPT-4 through openrouter due to the 32k context window size. The goal was to generate each beat one by one, supplying all the beats and the story so far as the context.
+I used GPT-4 through openrouter due to the 32k context window size. The goal was to generate each beat one by one, supplying all the beats and the story-so-far as the context.
 I experimented with 3 separate techniques:
 
 1. [Simple Generator](https://github.com/kevinmartinjos/beats-to-prose/blob/main/generators/simple_generator.py), which simply concatenates all the beats together and makes a single request to openai, asking it to write the entire story in one go
@@ -93,8 +93,9 @@ I will also need to choose a tokenizer. I'm not sure if that's the kind of answe
 Some ideas:
 
 1. Use another LLM to grade the response.
-2. Use something like BLUE score (i.e n-gram overlap) to see if words in the beat are indeed present in the expanded prose
-3. User feedback (eg: thumbs up and thumbs down buttons)
+2. Use something like n-gram overlap to see if words in the beat are indeed present in the expanded prose
+3. Use a summarization model to summarize the generated prose. How close is the summary to the original beat?
+4. User feedback (eg: thumbs up and thumbs down buttons)
 
 ## What about cost and latency considerations?
 As long as the model is hosted by a third party, latency is to a certain extent out of our control. We can, however, have some control over latency through:
