@@ -1,0 +1,6 @@
+generator_type: "interactive_generator"
+model_name: "openai/gpt-4-32k"
+preamble: "You are an author who writes fiction. Your job is to expand the following list of prompts one by one to prose."
+max_tokens_per_beat: 300
+num_choices: 1
+seed: 1234

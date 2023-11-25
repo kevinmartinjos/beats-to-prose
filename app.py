@@ -2,9 +2,10 @@ from typing import Union
 from argparse import ArgumentParser
 import pprint
 
-from common.constants import GENERATOR_SIMPLE, GENERATOR_SEQUENTIAL
+from common.constants import GENERATOR_SIMPLE, GENERATOR_SEQUENTIAL, GENERATOR_INTERACTIVE
 from common.utils import read_config, read_beats
 from data_structures.prompt import PromptCollection
+from generators.interactive_generator import InteractiveGenerator
 from generators.sequential_generator import SequentialGenerator
 from generators.simple_generator import SimpleGenerator
 
@@ -14,6 +15,8 @@ def get_generator(generator_type: str) -> Union[SimpleGenerator.__class__]:
         return SimpleGenerator
     elif generator_type == GENERATOR_SEQUENTIAL:
         return SequentialGenerator
+    elif generator_type == GENERATOR_INTERACTIVE:
+        return InteractiveGenerator
     else:
         raise ValueError(f"Unknown generator type: {generator_type}")
 

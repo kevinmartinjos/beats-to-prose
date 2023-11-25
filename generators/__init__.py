@@ -35,7 +35,8 @@ class BaseGenerator:
                 "messages": messages,
                 "n": self.num_choices,
                 "max_tokens": self.max_tokens_per_beat,
-                "seed": self.seed
+                "seed": self.seed,
+                "transforms": []
             })
         )
 
