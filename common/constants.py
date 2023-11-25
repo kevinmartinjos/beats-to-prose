@@ -1,0 +1,1 @@
+GENERATOR_SIMPLE = "simple_generator"
