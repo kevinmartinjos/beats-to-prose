@@ -14,11 +14,6 @@ class InteractiveGenerator(BaseGenerator):
     Very similar to SequentialGenerator. Expands beats one by one, feeding all the expanded beats as context in the
     subsequent call. The main difference is that each beat is expanded n times (configurable) with different sampling
     temperatures
-
-    - 0.2 - for a focused expansion
-    - 1.0 - the default
-    - 1.8 - Induces the model make a more unlikely/random expansion
-
     This allows the user to intervene and pick a coherent/safe expansion where it's warranted, while allowing to pick a
     more creative expansion at other places.
     """
