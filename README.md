@@ -29,9 +29,9 @@ I did not attempt part 2.
 
 ## If you a month to work on this, how would you improve your approach?
 I would fix some code smells:
-    - Introduce unit tests
-    - Instead of parsing yml directly to omegaconf, use dataclasses so that you can validate the config
-    - Use the streaming API instead of http calls. 
+- Introduce unit tests
+- Instead of parsing yml directly to omegaconf, use dataclasses so that you can validate the config
+- Use the streaming API instead of http calls. 
 
 Then I would try out different ways to choose the "best" response from the model. For example, I can expand the same beat multiple times using different prompts, different temperature e.t.c and ask the LLM to rate it ([Gunasekar et. al](https://arxiv.org/abs/2306.11644)) and use that to re-rank the LLM response.
 There are so many things we can try - happy to discuss them on a call.
@@ -43,7 +43,7 @@ Run `pip install -r requirements.txt` to install dependencies
 ### Simple Generator
 ```commandline
 export OPENROUTER_KEY=<OPENROUTER API KEY>
-python -b beat_samples/scifi.txt -c configs/simple_scifi.yml
+python app.py -b beat_samples/scifi.txt -c configs/simple_scifi.yml
 ```
 
 See `prose_samples/simple_scifi.txt` for an example output that used this config yml
@@ -51,7 +51,7 @@ See `prose_samples/simple_scifi.txt` for an example output that used this config
 ### Sequential Generator
 ```commandline
 export OPENROUTER_KEY=<OPENROUTER API KEY>
-python -b beat_samples/scifi.txt -c configs/sequential_scifi.yml
+python app.py -b beat_samples/scifi.txt -c configs/sequential_scifi.yml
 ```
 
 See `prose_samples/sequential_scifi.txt` for an example output that used this config yml
@@ -59,7 +59,7 @@ See `prose_samples/sequential_scifi.txt` for an example output that used this co
 ### Interactive Generator
 ```commandline
 export OPENROUTER_KEY=<OPENROUTER API KEY>
-python -b beat_samples/scifi.txt -c configs/interactive_scifi.yml
+python app.py -b beat_samples/scifi.txt -c configs/interactive_scifi.yml
 ```
 
 At each beat, you will prompted for a temperature. Enter a value between 0 and 2 (I do not validate the input, sorry).
