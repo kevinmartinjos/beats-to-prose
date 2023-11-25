@@ -11,9 +11,15 @@ class BaseGenerator:
     Base class for a generator.
     A generator takes in a list of beats and converts them to prose
     """
-    def __init__(self, model_name: str, prompt_collection: PromptCollection):
+    def __init__(
+            self, model_name: str, prompt_collection: PromptCollection, max_tokens_per_beat: int = 150,
+            num_choices: int = 1, seed: int = 1234
+    ):
         self.model_name = model_name
         self.prompt_collection = prompt_collection
+        self.max_tokens_per_beat = max_tokens_per_beat
+        self.num_choices = num_choices
+        self.seed = seed
 
     def generate(self) -> str:
         raise NotImplementedError
@@ -26,7 +32,10 @@ class BaseGenerator:
             },
             data=json.dumps({
                 "model": self.model_name, # Optional
-                "messages": messages
+                "messages": messages,
+                "n": self.num_choices,
+                "max_tokens": self.max_tokens_per_beat,
+                "seed": self.seed
             })
         )
 

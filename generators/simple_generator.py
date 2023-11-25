@@ -15,5 +15,6 @@ class SimpleGenerator(BaseGenerator):
         ]
         response = self.openrouter_generate(messages)
 
+        assert len(response["choices"]) == 1, "SimpleGenerator does not support multiple choices in the LLM response"
         return response["choices"][0]["message"]['content']
 

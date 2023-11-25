@@ -2,15 +2,20 @@ from typing import Union
 from argparse import ArgumentParser
 import pprint
 
-from common.constants import GENERATOR_SIMPLE
+from common.constants import GENERATOR_SIMPLE, GENERATOR_SEQUENTIAL
 from common.utils import read_config, read_beats
 from data_structures.prompt import PromptCollection
+from generators.sequential_generator import SequentialGenerator
 from generators.simple_generator import SimpleGenerator
 
 
 def get_generator(generator_type: str) -> Union[SimpleGenerator.__class__]:
     if generator_type == GENERATOR_SIMPLE:
         return SimpleGenerator
+    elif generator_type == GENERATOR_SEQUENTIAL:
+        return SequentialGenerator
+    else:
+        raise ValueError(f"Unknown generator type: {generator_type}")
 
 
 def main(beats_file: str, config_file: str) -> None:
@@ -19,7 +24,9 @@ def main(beats_file: str, config_file: str) -> None:
 
     prompt_collection = PromptCollection.from_beats(beats, config.preamble)
     generator_cls = get_generator(config.generator_type)
-    generator: Union[SimpleGenerator] = generator_cls(config.model_name, prompt_collection)
+    generator: Union[SimpleGenerator] = generator_cls(
+        config.model_name, prompt_collection, config.max_tokens_per_beat, config.num_choices, config.seed
+    )
     prose: str = generator.generate()
 
     pprint.pprint(prose)
